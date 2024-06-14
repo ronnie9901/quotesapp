@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -17,9 +15,6 @@ class categoriescreen extends StatefulWidget {
 class _categoriescreenState extends State<categoriescreen> {
   @override
   Widget build(BuildContext context) {
-    // Timer(Duration(seconds: 3),() {
-    //
-    // },);
     return Scaffold(
       appBar: AppBar(
         title: Text(' Categories '),
@@ -30,20 +25,16 @@ class _categoriescreenState extends State<categoriescreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
-                      
-
                       ...List.generate(
                           imagelist.length,
-                              (index) => Stack(children: [
+                          (index) => Stack(children: [
                                 Container(
-
                                   height: 80,
                                   width: 200,
                                   margin: EdgeInsets.all(5),
@@ -52,9 +43,7 @@ class _categoriescreenState extends State<categoriescreen> {
                                       borderRadius: BorderRadius.circular(10),
                                       image: DecorationImage(
                                           fit: BoxFit.cover,
-                                          image: AssetImage(
-                                              imagelist[index]))),
-
+                                          image: AssetImage(imagelist[index]))),
                                 ),
                               ]))
                     ],
@@ -154,6 +143,7 @@ class _categoriescreenState extends State<categoriescreen> {
                                   onTap: () {
                                     check = true;
                                     selectcat = forYouList[index]['name'];
+                                    imgbg = imagelist[index];
                                     Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
@@ -206,7 +196,7 @@ class _categoriescreenState extends State<categoriescreen> {
                                 onTap: () {
                                   check = true;
                                   selectcat = mostPopularList[index]['name'];
-
+                                  imgbg = imagelist2[index];
                                   // quotemodell!.changeList(quotemodell!.catList['Love']);
                                   setState(() {});
                                   Navigator.pushReplacement(
@@ -254,66 +244,6 @@ class _categoriescreenState extends State<categoriescreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    '    general Of Category',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ],
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      ...List.generate(
-                          generalListOfCategory.length,
-                          (index) => Stack(children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 140, top: 10),
-                                  child: Icon(
-                                      generalListOfCategory[index]['icon']),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    check = true;
-                                    selectcat =
-                                        generalListOfCategory[index]['name'];
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => homesreen(),
-                                        ));
-                                  },
-                                  child: Container(
-                                    height: 90,
-                                    width: 170,
-                                    margin: EdgeInsets.all(5),
-                                    decoration: BoxDecoration(
-                                        color: Colors.black12,
-                                        borderRadius: BorderRadius.circular(10),
-                                        image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: AssetImage(generalListOfCategory[index]['img']))),
-                                    child: Padding(
-                                      padding:
-                                          EdgeInsets.only(top: 65, left: 20),
-                                      child: Text(
-                                        generalListOfCategory[index]['name'],
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ]))
-                    ],
-                  ),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
                     '    personal  Growth',
                     style: TextStyle(fontSize: 20),
                   ),
@@ -337,6 +267,7 @@ class _categoriescreenState extends State<categoriescreen> {
                                 InkWell(
                                   onTap: () {
                                     check = true;
+                                    imgbg = imagelist[index];
                                     selectcat =
                                         personalGrowthList[index]['name'];
                                     Navigator.pushReplacement(

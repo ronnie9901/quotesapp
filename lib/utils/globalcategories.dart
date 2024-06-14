@@ -1,145 +1,128 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-List generalListOfCategory = [
+import '../allscreens/home.dart';
+
+List allListOfCategory = [
   {
     'name': 'General',
     'icon': CupertinoIcons.circle,
-    'img':'assets/catimg/general.jpeg'
+    'img': 'assets/catimg/14.jpg',
   },
   {
-    'name': 'My Favourites',
+    'name': ' Favourites',
     'icon': CupertinoIcons.heart,
-    'img':'assets/catimg/myfav.jpeg'
+    'img': 'assets/catimg/myfav.jpeg',
   },
   {
-    'name': 'My Collection',
+    'name': ' Collection',
     'icon': CupertinoIcons.collections,
-    'img':'assets/catimg/mycol.jpeg'
+    'img': 'assets/catimg/mycol.jpeg',
   },
   {
-    'name': 'Based on your mood',
+    'name': ' mood',
     'icon': CupertinoIcons.hand_thumbsup,
-    'img':'assets/catimg/mymood.jpeg'
+    'img': 'assets/catimg/mymood.jpeg',
   },
   {
-    'name': 'My own quotes',
+    'name': ' own quotes',
     'icon': CupertinoIcons.text_quote,
-    'img':'assets/catimg/myqoute.jpeg'
+    'img': 'assets/catimg/myqoute.jpeg',
   },
-
 ];
 List forYouList = [
   {
-    'name':'Motivation',
+    'name': 'Motivation',
     'icon': CupertinoIcons.book,
-    'img':'assets/catimg/loyalty.jpeg'
+    'img': 'assets/catimg/loyalty.jpeg',
   },
   {
-    'name':'Affirmation',
+    'name': 'Affirmation',
     'icon': CupertinoIcons.chat_bubble_2,
-    'img':'assets/catimg/ego.jpeg'
+    'img': 'assets/catimg/ego.jpeg',
   },
   {
-    'name':'Funny',
+    'name': 'Funny',
     'icon': CupertinoIcons.smiley,
-    'img':'assets/affirmatiom/image3.jpeg'
+    'img': 'assets/affirmatiom/image3.jpeg',
   },
   {
-    'name':'Happy',
+    'name': 'Happy',
     'icon': CupertinoIcons.wand_rays,
-    'img':'assets/catimg/fd.jpeg'
+    'img': 'assets/catimg/fd.jpeg',
   },
   {
-    'name':'Hope',
+    'name': 'Hope',
     'icon': CupertinoIcons.sun_min,
-    'img':'assets/catimg/love.jpeg'
+    'img': 'assets/catimg/love.jpeg',
   },
 ];
 List mostPopularList = [
   {
-    'name':'Love',
-     'icon': CupertinoIcons.heart,
-     'img':'assets/catimg/love.jpeg'
+    'name': 'Love',
+    'icon': CupertinoIcons.heart,
+    'img': 'assets/catimg/17.jpeg',
   },
   {
-    'name':'Friendship',
+    'name': 'Friendship',
     'icon': CupertinoIcons.infinite,
-    'img':'assets/catimg/fd.jpeg'
-
+    'img': 'assets/catimg/fd.jpeg',
   },
   {
-    'name':'Loyalty',
+    'name': 'Loyalty',
     'icon': CupertinoIcons.lock,
-    'img':'assets/catimg/loyalty.jpeg'
+    'img': 'assets/catimg/loyalty.jpeg',
   },
   {
-    'name':'Ego',
+    'name': 'Ego',
     'icon': CupertinoIcons.tropicalstorm,
-    'img':'assets/catimg/ego.jpeg'
+    'img': 'assets/catimg/ego.jpeg',
   },
-
 ];
 List personalGrowthList = [
   {
-    'name':'Discipline',
+    'name': 'Discipline',
     'icon': CupertinoIcons.hare,
-    'img':'assets/catimg/discipline.jpeg'
+    'img': 'assets/catimg/discipline.jpeg',
   },
   {
-    'name':'Self Esteem',
+    'name': 'Self Esteem',
     'icon': CupertinoIcons.greaterthan,
-    'img':'assets/catimg/self.jpeg'
+    'img': 'assets/catimg/self.jpeg',
   },
   {
-    'name':'Kindness',
+    'name': 'Kindness',
     'icon': CupertinoIcons.wind,
-    'img':'assets/catimg/kind.jpeg'
+    'img': 'assets/catimg/kind.jpeg',
   },
   {
-    'name':'Gratitude',
+    'name': 'Gratitude',
     'icon': CupertinoIcons.eye,
-    'img':'assets/catimg/grat.jpeg'
+    'img': 'assets/catimg/grat.jpeg',
   },
   {
-    'name':'Success',
+    'name': 'Success',
     'icon': CupertinoIcons.light_min,
-    'img':'assets/catimg/success.jpeg'
+    'img': 'assets/catimg/success.jpeg',
   },
 ];
 List hardTimeList = [
   {
-    'name':'Broken',
+    'name': 'Broken',
     'icon': CupertinoIcons.heart_slash,
-    'img':'assets/catimg/3.jpeg'
+    'img': 'assets/catimg/3.jpeg',
   },
   {
-    'name':'Sad',
+    'name': 'Sad',
     'icon': CupertinoIcons.drop,
-    'img':'assets/catimg/image1.jpeg'
+    'img': 'assets/catimg/image1.jpeg',
   },
   {
-    'name':'Deep',
+    'name': 'Deep',
     'icon': CupertinoIcons.cloud_drizzle,
-    'img':'assets/catimg/image22.jpeg'
+    'img': 'assets/catimg/image22.jpeg',
   },
-
 ];
-List calmDownList = [
-  {
-    'name':'Positive',
-    'icon': CupertinoIcons.moon_stars,
-  },
-  {
-    'name':'Mental Health',
-    'icon': CupertinoIcons.lasso,
-  },
-  {
-    'name':'Patience',
-    'icon': CupertinoIcons.command,
-  },
-
-];
-
 List<String> categories = [
   "Love",
   "Affirmation",
@@ -162,25 +145,71 @@ List<String> categories = [
   "Ego",
   "Patience",
 ];
-
-List imagelist=[
-    'assets/affirmatiom/img1.jpg',
-    'assets/affirmatiom/image6.jpeg',
-    'assets/affirmatiom/image5.jpeg',
-    'assets/affirmatiom/image4.jpeg',
-    'assets/affirmatiom/image3.jpeg',
+List imagelist = [
+  'assets/affirmatiom/img1.jpg',
+  'assets/affirmatiom/image6.jpeg',
+  'assets/affirmatiom/image5.jpeg',
+  'assets/affirmatiom/image4.jpeg',
+  'assets/affirmatiom/image3.jpeg',
 ];
-List imagelist2=[
-  'assets/catimg/image22.jpeg'
-      'assets/catimg/image1.jpeg',
+List imagelist2 = [
+  'assets/catimg/image22.jpeg',
+  'assets/catimg/image1.jpeg',
   'assets/catimg/kind.jpeg',
   'assets/catimg/success.jpeg',
   'assets/catimg/grat.jpeg'
 ];
-List imagelis3=[
-  'assets/catimg/general.jpeg'
-      'assets/catimg/myfav.jpeg',
+List imagelis3 = [
+  'assets/catimg/general.jpeg',
+  'assets/catimg/myfav.jpeg',
   'assets/catimg/mycol.jpeg',
   'assets/catimg/mymood.jpeg',
   'assets/catimg/myqoute.jpeg'
+];
+List<Quotemodel> fav = [];
+int selectindex = 0;
+String imgbg = 'assets/affirmatiom/image6.jpeg';
+String selectcat = '';
+bool istrue = true;
+var font = 'Orbitron';
+List fontFamilyList = [
+  'Dancing Script',
+  'Josefin Sans',
+  'Anton',
+  'Exo 2',
+  'Pacifico',
+  'Lobster',
+  'Imbue',
+  'Crimson Text',
+  'Prompt',
+  'Varela Round',
+  'Licorice',
+  'Play',
+  'IBM Plex Mono',
+  'Caveat',
+  'Chakra Petch',
+  'Shadows Into Light',
+  'Abril Fatface',
+  'Satisfy',
+  'Lilita One',
+  'Galada',
+  'Permanent Marker',
+  'Indie Flower',
+  'Edu NSW ACT Foundation',
+  'Orbitron',
+  'Cinzel',
+];
+Color c1 = Colors.white;
+List colorlist = [
+  Colors.tealAccent,
+  Colors.white,
+  Colors.black,
+  Colors.yellow,
+  Colors.pink,
+  Colors.grey,
+  Colors.green,
+  Colors.purple,
+  Colors.red,
+  Colors.pinkAccent,
+  Colors.blue,
 ];

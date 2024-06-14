@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:quotesapp/utils/globalcategories.dart';
 
 class splacesceen extends StatefulWidget {
   const splacesceen({super.key});
@@ -14,8 +15,8 @@ class _splacesceenState extends State<splacesceen> {
   @override
 
   Widget build(BuildContext context) {
-    Timer(Duration(seconds: 3),() {
-      Navigator.pushReplacementNamed(context, '/home');
+    Timer(Duration(seconds: 2),() {
+      Navigator.of(context).pushReplacementNamed('/home');
     },);
     return  Scaffold(
       backgroundColor: Colors.grey,
@@ -29,8 +30,8 @@ class _splacesceenState extends State<splacesceen> {
                 width: double.infinity,
                 decoration: BoxDecoration(image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: NetworkImage(
-                    'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg'
+                  image: AssetImage(
+                    'assets/catimg/image22.jpeg',
                   )
                 )
                 ),

@@ -172,19 +172,3 @@ class _themesrceenState extends State<themesrceen> {
     );
   }
 }
-Color  c1 =Colors.white;
-List colorlist=[
-  Colors.tealAccent,
-  Colors.black,
-  Colors.yellow,
-  Colors.pink,
-  Colors.grey,
-  Colors.green,
-  Colors.purple,
-  Colors.red,
-  Colors.pinkAccent,
-  Colors.blue,
-
-
-
-];

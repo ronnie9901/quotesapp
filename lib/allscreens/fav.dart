@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../utils/globalcategories.dart';
 import 'home.dart';
 
 class favscreen extends StatefulWidget {

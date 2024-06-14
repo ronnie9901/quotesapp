@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:quotesapp/allscreens/thiemepage.dart';
-import 'package:quotesapp/utils/globalcategories.dart'; // Ensure this file contains definitions for `list` and `categories`
-
+import 'package:quotesapp/allscreens/shere.dart';
+import 'package:quotesapp/utils/globalcategories.dart';
+import 'package:google_fonts/google_fonts.dart'; // Ensure this file contains definitions for `list` and `categories`
 import '../utils/global.dart';
 import 'categorios.dart';
-import 'fav.dart';
 
 Quotemodel? quotemodell;
 
@@ -16,7 +17,6 @@ class homesreen extends StatefulWidget {
   @override
   State<homesreen> createState() => _homesreenState();
 }
-
 class _homesreenState extends State<homesreen> {
   @override
   void initState() {
@@ -27,82 +27,163 @@ class _homesreenState extends State<homesreen> {
     quotemodell!.generateMap();
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: c1,
-      body: Column(
-        children: [
-          Container(
-            height: 714,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: c1,
-              image: DecorationImage(
-                image: AssetImage(imgbg),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: PageView(
-              scrollDirection: Axis.vertical,
-              physics: BouncingScrollPhysics(),
-              children: [
-                ...List.generate(
-                  check
-                      ? quotemodell!.catList[selectcat].length
-                      : quotemodell!.quotemodelList.length,
-                  (index) => Container(
-                    child: Center(
-                      child: ListTile(
+      body: Container(
+        height: 714.6,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: c1,
+          image: DecorationImage(
+            image: AssetImage(imgbg),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: PageView(
+          scrollDirection: Axis.vertical,
+          physics: BouncingScrollPhysics(),
+          children: [
+            ...List.generate(
+              check
+                  ? quotemodell!.catList[selectcat].length
+                  : quotemodell!.quotemodelList.length,
+              (index) => Container(
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ListTile(
                         title: SelectableText(
                           check
                               ? quotemodell!.catList[selectcat][index].quote!
                               : quotemodell!.quotemodelList[index].quote!,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25,
-                            color: c1,
-                          ),
+                          style: GoogleFonts.getFont(font,
+                              color: c1, fontSize: 20),
                         ),
                         subtitle: SelectableText(
-                          check
-                              ? quotemodell!.catList[selectcat][index].author!
-                              : quotemodell!.quotemodelList[index].author!,
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: c1,
-                          ),
-                        ),
-                        trailing: Column(
-                          children: [
-                            InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    if (check) {
-                                      fav.add(quotemodell!.catList[selectcat]
-                                          [index]);
-                                    } else {
-                                      fav.add(
-                                          quotemodell!.quotemodelList[index]);
-                                    }
-                                  });
-                                  Navigator.of(context).pushNamed('/fav');
-                                },
-                                child: Icon(
-                                  Icons.favorite,
-                                  color: Colors.white,
-                                )),
-                          ],
-                        ),
+                            check
+                                ? quotemodell!.catList[selectcat][index].author!
+                                : quotemodell!.quotemodelList[index].author!,
+                            style: GoogleFonts.getFont(font,
+                                color: c1, fontSize: 20)),
+                        trailing: InkWell(
+                            onTap: () {
+                              Clipboard.setData(ClipboardData(
+                                text: check
+                                    ? quotemodell!
+                                        .catList[selectcat][index].quote!
+                                    : quotemodell!.quotemodelList[index].quote!,
+                              ));
+                            },
+                            child: Icon(
+                              Icons.copy,
+                              color: c1,
+                            )),
                       ),
-                    ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Column(
+                        children: [
+                          Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        if (check) {
+                                          fav.add(quotemodell!
+                                              .catList[selectcat][index]);
+                                        } else {
+                                          fav.add(quotemodell!
+                                              .quotemodelList[index]);
+                                        }
+                                      });
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                              content:
+                                                  Text('added in favorites ')));
+                                    },
+                                    child: Icon(
+                                      Icons.favorite,
+                                      color: c1,
+                                    )),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                IconButton(
+                                    onPressed: () async {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => shere(
+                                                quote: check
+                                                    ? quotemodell!
+                                                        .catList[selectcat]
+                                                            [index]
+                                                        .quote!
+                                                    : quotemodell!
+                                                        .quotemodelList[index]
+                                                        .quote!,
+                                                author: check
+                                                    ? quotemodell!
+                                                        .catList[selectcat]
+                                                            [index]
+                                                        .author!
+                                                    : quotemodell!
+                                                        .quotemodelList[index]
+                                                        .author!,
+                                                img: imgbg),
+                                          ));
+                                    },
+                                    icon: Icon(
+                                      Icons.save,
+                                      color: c1,
+                                    )),
+                                IconButton(
+                                    onPressed: () async {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => shere(
+                                                quote: check
+                                                    ? quotemodell!
+                                                        .catList[selectcat]
+                                                            [index]
+                                                        .quote!
+                                                    : quotemodell!
+                                                        .quotemodelList[index]
+                                                        .quote!,
+                                                author: check
+                                                    ? quotemodell!
+                                                        .catList[selectcat]
+                                                            [index]
+                                                        .author!
+                                                    : quotemodell!
+                                                        .quotemodelList[index]
+                                                        .author!,
+                                                img: imgbg),
+                                          ));
+                                    },
+                                    icon: Icon(
+                                      Icons.share,
+                                      color: c1,
+                                    ))
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                )
-              ],
-            ),
-          ),
-        ],
+                ),
+              ),
+            )
+          ],
+        ),
       ),
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(left: 25),
@@ -118,134 +199,186 @@ class _homesreenState extends State<homesreen> {
                       showModalBottomSheet(
                         context: context,
                         builder: (context) => Container(
-                          height: 200,
+                          height: 250,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: Colors.grey,
+                            color: Colors.black54,
                           ),
-                          child: Column(
-                            children: [
-                              Row(
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  ...List.generate(
-                                      colorlist.length,
-                                      (index) => InkWell(
+                                  Text(
+                                    '   font color',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      ...List.generate(
+                                          colorlist.length,
+                                          (index) => InkWell(
+                                                onTap: () {
+                                                  setState(() {
+                                                    selectindex = index;
+                                                    c1 = colorlist[selectindex];
+                                                  });
+                                                },
+                                                child: Container(
+                                                  margin: EdgeInsets.all(10),
+                                                  height: 50,
+                                                  width: 50,
+                                                  decoration: BoxDecoration(
+                                                      color: colorlist[index],
+                                                      shape: BoxShape.circle),
+                                                ),
+                                              ))
+                                    ],
+                                  ),
+                                  Text(
+                                    '  font style',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      ...List.generate(
+                                        fontFamilyList.length,
+                                        (index) => Container(
+                                          alignment: Alignment.center,
+                                          margin: EdgeInsets.all(10),
+                                          height: 50,
+                                          width: 50,
+                                          decoration: BoxDecoration(),
+                                          child: GestureDetector(
                                             onTap: () {
                                               setState(() {
-                                                selectindex = index;
-                                                c1 = colorlist[selectindex];
+                                                font = fontFamilyList[index];
                                               });
                                             },
-                                            child: Container(
-                                              margin: EdgeInsets.all(10),
-                                              height: 50,
-                                              width: 50,
-                                              decoration: BoxDecoration(
-                                                  color: colorlist[index],
-                                                  shape: BoxShape.circle),
-                                            ),
-                                          ))
+                                            child: Text(' Aa',
+                                                style: GoogleFonts.getFont(
+                                                    fontFamilyList[index],
+                                                    color: Colors.white)),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )
                                 ],
-                              )
-                            ],
+                              ),
+                            ),
                           ),
                         ),
                       );
                     },
                     child: Icon(
                       CupertinoIcons.arrow_up_square,
-                      color: Colors.white,
+                      color: c1,
                     )),
               ],
             ),
             SizedBox(
               height: 10,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  height: 40,
-                  width: 90,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: TextButton(
-                    onPressed: () {
-                      setState(() {});
-                      Navigator.of(context).pushNamed('/cate');
-                    },
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.category_outlined,
-                          color: Colors.white,
-                          size: 15,
-                        ),
-                        Text(
-                          ' Catego',
-                          style: TextStyle(color: Colors.blue),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  height: 40,
-                  width: 90,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pushNamed('/theme');
-                    },
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.category_outlined,
-                          color: Colors.white,
-                          size: 15,
-                        ),
-                        Text(
-                          ' theme',
-                          style: TextStyle(color: Colors.blue),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  height: 40,
-                  width: 90,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.theaters,
-                          color: Colors.white,
-                          size: 15,
-                        ),
-                        Text(
-                          ' setting ',
-                          style: TextStyle(color: Colors.blue),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
+            buildRow(context),
           ],
         ),
       ),
+    );
+  }
+
+  Row buildRow(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Container(
+          height: 40,
+          width: 90,
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: TextButton(
+            onPressed: () {
+              setState(() {});
+              Navigator.of(context).pushNamed('/cate');
+            },
+            child: Row(
+              children: [
+                Icon(
+                  CupertinoIcons.rectangle_grid_2x2,
+                  color: Colors.white,
+                  size: 15,
+                ),
+                Text(
+                  '   Cat',
+                  style: TextStyle(color: Colors.blue),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Container(
+          height: 40,
+          width: 90,
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: TextButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed('/theme');
+            },
+            child: Row(
+              children: [
+                Icon(
+                  CupertinoIcons.paintbrush,
+                  color: Colors.white,
+                  size: 15,
+                ),
+                Text(
+                  ' theme',
+                  style: TextStyle(color: Colors.blue),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Container(
+          height: 40,
+          width: 90,
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: TextButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed('/mode');
+            },
+            child: Row(
+              children: [
+                Icon(
+                  CupertinoIcons.settings,
+                  color: Colors.white,
+                  size: 15,
+                ),
+                Text(
+                  ' setting ',
+                  style: TextStyle(color: Colors.blue),
+                ),
+              ],
+            ),
+          ),
+        )
+      ],
     );
   }
 }
@@ -279,9 +412,3 @@ class Quotemodel {
     print(quotemodelList);
   }
 }
-
-List<Quotemodel> fav = [];
-int selectindex = 0;
-String imgbg = 'assets/affirmatiom/image6.jpeg';
-String selectcat = '';
-bool istrue = true;
