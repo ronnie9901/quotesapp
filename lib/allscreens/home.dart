@@ -197,6 +197,7 @@ class _homesreenState extends State<homesreen> {
                     onTap: () {
                       setState(() {});
                       showModalBottomSheet(
+                        backgroundColor: Colors.black,
                         context: context,
                         builder: (context) => Container(
                           height: 250,
